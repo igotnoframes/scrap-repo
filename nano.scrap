@@ -1,12 +1,12 @@
 #!/bin/bash
-
+# DEPENDS: ncurses, zlib
 
 echo ">>> Downloading Nano source code..."
 wget -q https://www.nano-editor.org/dist/v8/nano-8.0.tar.gz
 tar -xzf nano-8.0.tar.gz
 cd nano-8.0
 
-#use flags for the command
+# use flags for the command
 CONFIG_FLAGS="--prefix=/usr"
 
 if [[ "$USE_FLAGS" == "all" ]]; then
@@ -15,10 +15,11 @@ if [[ "$USE_FLAGS" == "all" ]]; then
 fi
 
 echo ">>> Configuring Nano..."
-./configure $CONFIG_FLAGS
+# We add a check here to ensure the build stops if a dependency is missing
+./configure $CONFIG_FLAGS || exit 1
 
 echo ">>> Compiling Nano..."
-make -j4
+make -j4 || exit 1
 
 echo ">>> Installing Nano..."
 make install
