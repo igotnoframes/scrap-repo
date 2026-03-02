@@ -1,0 +1,28 @@
+#!/bin/bash
+
+
+echo ">>> Downloading Nano source code..."
+wget -q https://www.nano-editor.org/dist/v8/nano-8.0.tar.gz
+tar -xzf nano-8.0.tar.gz
+cd nano-8.0
+
+#use flags for the command
+CONFIG_FLAGS="--prefix=/usr"
+
+if [[ "$USE_FLAGS" == "all" ]]; then
+    echo ">>> Enabling uses"
+    CONFIG_FLAGS="$CONFIG_FLAGS --enable-utf8 --enable-color --enable-extra"
+fi
+
+echo ">>> Configuring Nano..."
+./configure $CONFIG_FLAGS
+
+echo ">>> Compiling Nano..."
+make -j4
+
+echo ">>> Installing Nano..."
+make install
+
+# clean junk
+cd ..
+rm -rf nano-8.0 nano-8.0.tar.gz
