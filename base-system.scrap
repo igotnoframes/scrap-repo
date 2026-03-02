@@ -1,0 +1,4 @@
+#!/bin/bash
+# DEPENDS: ncurses, nano
+
+echo ">>> Scrap Linux base system is now populated."
