@@ -18,3 +18,5 @@ make install || exit 1
 
 cd ..
 rm -rf nano-8.0 nano-8.0.tar.gz
+
+#where the fuck is the climb function 
